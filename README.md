@@ -7,9 +7,9 @@
 - Список задач. 
 - Список контактов.
 
-![schedule](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleMainViewBC.png)
-![tasks](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/TasksMainViewBC.png)
-![contacts](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ContactsMainView.png)
+![schedule](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleMainViewBC.png)
+![tasks](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/TasksMainViewBC.png)
+![contacts](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ContactsMainView.png)
 
 ### Расписание занятий. 
 На главном экране отображается календарь в развернутом или свернутом виде.
