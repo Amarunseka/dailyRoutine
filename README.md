@@ -7,11 +7,23 @@
 - Список задач. 
 - Список контактов.
 
-![schedule](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleMainViewBC.png)
-![tasks](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/TasksMainViewBC.png)
-![contacts](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ContactsMainView.png)
+[![schedule](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleMainViewBC.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleMainViewBC.png)
+[![tasks](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/TasksMainViewBC.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/TasksMainViewBC.png)
+[![contacts](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ContactsMainView.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ContactsMainView.png)
 
 ### Расписание занятий. 
+[![scheduleBC](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleMainViewBC.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleMainViewBC.png)
+[![scheduleSC](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleMainViewSC.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleMainViewSC.png)
+[![ScheduleDelete](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleDelete.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleDelete.png)
+[![ScheduleOptEmpty](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleOptEmpty.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleOptEmpty.png)
+[![ScheduleEdit](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleEdit.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleEdit.png)
+[![ScheduleOptEmpty](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleOptEmpty.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleOptEmpty.png)
+[![ScheduleOptTeacherChose](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleOptTeacherChose.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleOptTeacherChose.png)
+[![ScheduleOptDatePD](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleOptDatePD.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleOptDatePD.png)
+
+
+
+
 На главном экране отображается календарь в развернутом или свернутом виде.
 При выборе даты на календаре,  отображаются запланированные события на выбранную дату с указанием:
 - названия
