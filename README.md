@@ -7,6 +7,10 @@
 - Список задач. 
 - Список контактов.
 
+![schedule](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleMainViewBC.png)
+![tasks](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/TasksMainViewBC.png)
+![contacts](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ContactsMainView.png)
+
 ### Расписание занятий. 
 На главном экране отображается календарь в развернутом или свернутом виде.
 При выборе даты на календаре,  отображаются запланированные события на выбранную дату с указанием:
