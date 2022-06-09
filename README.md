@@ -40,7 +40,7 @@ ___
 
 ### Планировщик задач.
 [![TasksMainViewBC](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/TasksMainViewBC.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/TasksMainViewBC.png)
-[![TasksMainViewSC](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/TasksMainViewBC.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/TasksMainViewSC.png)
+[![TasksMainViewSC](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/TasksMainViewSC.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/TasksMainViewSC.png)
 [![TaskOptEmpty](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/TaskOptEmpty.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/TaskOptEmpty.png)
 
 На главном экране отображается календарь в развернутом или свернутом виде.
