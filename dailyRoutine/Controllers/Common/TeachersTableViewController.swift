@@ -15,28 +15,28 @@ class TeachersTableViewController: UITableViewController {
     private var contactArray: Results<ContactsRealmModel>!
     
     
-    // MARK: - Life cycle
-
+    // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .white
-        title = "Teachers"
-        
+        setupView()
         setupTableView()
         
         // заполняем наш массив всеми учителями из модели, по фильтру учитель
+    }
+    
+    // MARK: - private methods
+    private func setupView(){
+        view.backgroundColor = .white
+        title = "Teachers"
         contactArray = RealmManager.shared.localRealm.objects(ContactsRealmModel.self).filter("contactType = 'Teacher'")
     }
     
-    // MARK: - Targets & Methods
 
     private func setupTableView(){
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(
-            ContactsTableViewCell.self,
-            forCellReuseIdentifier: String(describing: ContactsTableViewCell.self))
+        tableView.register(ContactsTableViewCell.self,
+                           forCellReuseIdentifier: String(describing: ContactsTableViewCell.self))
     }
     
     // отдаем имя выбранного учителя
@@ -45,9 +45,11 @@ class TeachersTableViewController: UITableViewController {
         outputTeacherName(teacher)
         self.navigationController?.popViewController(animated: true)
     }
+}
     
+// MARK: - TableView
+extension TeachersTableViewController {
     
-    // MARK: - TableView
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contactArray.count
     }

@@ -9,13 +9,15 @@ import UIKit
 
 class MainTabBarViewController: UITabBarController {
 
+    
+    // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupTabBar()
     }
     
     
+    // MARK: - private methods
     private func setupTabBar(){
         
         let scheduleViewController = createNavController(

@@ -10,7 +10,7 @@ import FSCalendar
 
 final class CalendarView: UIView {
     
-    // MARK: - initial elements
+    // MARK: - initialise elements
     private var calendarHeightConstraint: NSLayoutConstraint!
     weak var outputCalendarDelegate: OutputCalendarDataProtocol?
     

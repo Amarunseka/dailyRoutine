@@ -156,7 +156,7 @@ class ScheduleOptionsTableViewController: UITableViewController {
     
     
     
-    // просто метод для перехода
+    // переход на color
     private func pushToColorsViewController(){
         let vc = ColorsViewController()
         vc.outputColor = { [weak self] color in
@@ -221,7 +221,6 @@ class ScheduleOptionsTableViewController: UITableViewController {
     
     
     // MARK: - TableView (Header)
-
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: HeadersTableViewCell.self)) as! HeadersTableViewCell
         
@@ -238,10 +237,9 @@ class ScheduleOptionsTableViewController: UITableViewController {
     
     
     // MARK: - TableView (DidSelect)
-
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! OptionsTableViewCell
-        
+
         switch indexPath {
             // передаем в алерт наш лейб, и в комплишене алерта присваиваем ему название из сделанного стринга из дэйтпикера
         case [0,0]: alertDate(label: cell.nameCellLabel) { numberOfWeekday, date in
@@ -254,7 +252,7 @@ class ScheduleOptionsTableViewController: UITableViewController {
             // а потом передаем в модель время с формированное в самом алерте и переданому в комплишене
             self.scheduleTime = time
         }
-            
+
             // передаем в алерт наш лейбназвание алерта, потом плейсхолдер который будем видеть текстфилде алерта
         case [1,0]: alertForCellName(
             label: cell.nameCellLabel,
@@ -263,7 +261,7 @@ class ScheduleOptionsTableViewController: UITableViewController {
                 // передаем в модель текс из текстфилда алерта
                 self.cellNamesArray[1][0] = text
             }
-            
+
             // передаем в алерт наш лейбназвание алерта, потом плейсхолдер который будем видеть текстфилде алерта
         case [1,1]: alertForCellName(
             label: cell.nameCellLabel,
@@ -272,7 +270,7 @@ class ScheduleOptionsTableViewController: UITableViewController {
                 // передаем в модель текс из текстфилда алерта
                 self.cellNamesArray[1][1] = text
             }
-            
+
             // передаем в алерт наш лейбназвание алерта, потом плейсхолдер который будем видеть текстфилде алерта
         case [1,2]: alertForCellName(
             label: cell.nameCellLabel,
@@ -281,7 +279,7 @@ class ScheduleOptionsTableViewController: UITableViewController {
                 // передаем в модель текс из текстфилда алерта
                 self.cellNamesArray[1][2] = text
             }
-            
+
             // передаем в алерт наш лейбназвание алерта, потом плейсхолдер который будем видеть текстфилде алерта
         case [1,3]: alertForCellName(
             label: cell.nameCellLabel,
@@ -290,17 +288,16 @@ class ScheduleOptionsTableViewController: UITableViewController {
                 // передаем в модель текс из текстфилда алерта
                 self.cellNamesArray[1][3] = text
             }
-            
+
         case [2,0]:
             // в самом TeachersTableViewController есть способ передачи сюда учителя
             pushToTeacherViewController()
-            
+
         case [3,0]:
             // в самом ScheduleColorsViewController есть способ передачи сюда цвета
             pushToColorsViewController()
-
         default:
-            print("Error")
+            print("")
         }
     }
 }

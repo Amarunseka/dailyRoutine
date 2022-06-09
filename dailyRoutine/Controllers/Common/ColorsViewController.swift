@@ -11,11 +11,11 @@ class ColorsViewController: UITableViewController {
 
     // MARK: - initialise elements
     // названия заголовков
-    var outputColor: ((String)->())?
     private let headersNameArray = ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "DEEP BLUE", "PURPLE"]
+    var outputColor: ((String)->())?
+
     
-    
-    // MARK: - Life cycle
+    // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Chose colors"
@@ -23,8 +23,7 @@ class ColorsViewController: UITableViewController {
     }
     
     
-    // MARK: - Actions-Targets
-
+    // MARK: - private methods
     private func setupTableView(){
         tableView.delegate = self
         tableView.dataSource = self
@@ -42,8 +41,17 @@ class ColorsViewController: UITableViewController {
             forHeaderFooterViewReuseIdentifier: String(describing: HeadersTableViewCell.self))
     }
     
-    // MARK: - TableView
+    private func choseColor(color: String) {
+        guard let outputColor = outputColor else {return}
+        outputColor(color)
+        self.navigationController?.popViewController(animated: true)
+    }
+}
     
+// MARK: - TableView
+extension ColorsViewController{
+    
+    // MARK: Cells
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 7
     }
@@ -59,24 +67,9 @@ class ColorsViewController: UITableViewController {
         return cell
     }
     
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
-    
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: HeadersTableViewCell.self)) as! HeadersTableViewCell
-        
-        header.headerCellConfigure(nameArray: headersNameArray, section: section)
-        return header
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
-    }
-    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
@@ -92,15 +85,16 @@ class ColorsViewController: UITableViewController {
             choseColor(color: "FFFFFF")
         }
     }
-}
-
-
-// MARK: - Chose Color
-extension ColorsViewController {
     
-    private func choseColor(color: String) {
-        guard let outputColor = outputColor else {return}
-        outputColor(color)
-        self.navigationController?.popViewController(animated: true)
+    // MARK: - headers
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: HeadersTableViewCell.self)) as! HeadersTableViewCell
+        
+        header.headerCellConfigure(nameArray: headersNameArray, section: section)
+        return header
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
     }
 }
