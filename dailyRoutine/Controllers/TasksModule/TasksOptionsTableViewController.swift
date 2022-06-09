@@ -9,30 +9,20 @@ import UIKit
 
 class TasksOptionsTableViewController: UITableViewController {
 
-    
     // MARK: - initialise elements
-    
-    // массив названия заголовков
     private let headersNameArray = ["DATE", "LESSON", "TASK", "COLOR"]
-    
-    // массив названий ячеек
     var cellsNameArray = ["Date", "Name lesson", "Description task", "106BFF"]
-    
-    // модель сохранения в базу данных
     var tasksModel = TasksRealmModel()
-    
     var editMode = false
     var taskDate: Date?    
     
     // MARK: - Life cycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Options Tasks"
         setupTableView()
         
-        // добавляем кнопку в navigationBar
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .save,
             target: self,
@@ -40,7 +30,6 @@ class TasksOptionsTableViewController: UITableViewController {
     }
     
     // MARK: - Actions-Targets
-    
     private func setupTableView(){
         
         tableView.delegate = self
@@ -48,7 +37,7 @@ class TasksOptionsTableViewController: UITableViewController {
         tableView.backgroundColor = .systemGray6
         tableView.bounces = false
 
-        tableView.separatorStyle = .none // убираем разделитель между ячейками
+        tableView.separatorStyle = .none
         
         tableView.register(
             OptionsTableViewCell.self,
@@ -67,19 +56,16 @@ class TasksOptionsTableViewController: UITableViewController {
             taskDate == nil ||
             cellsNameArray[1] == "Name lesson" ||
             cellsNameArray[2] == "Description task" {
-            
-            /// !!!!    ВМЕСТО АЛЕРТА СДЕЛАТЬ НЕАКТИВНОЙ КНОПКУ !!!!
-                alertSuccessSave(title: "Error", message: "Required fields: DATE, LESSON, TASK")
+
+            alertSuccessSave(title: "Error", message: "Required fields: DATE, LESSON, TASK")
         } else {
             
             switch editMode {
             case false:
                 setModel()
                 
-                // сохраняем нашу модель в базу данных
                 RealmManager.shared.saveTaskModel(model: tasksModel)
                 
-                // а теперь мы наоборот говорим, что после сохранения наша модель равняется модели сохраненной в Real
                 tasksModel = TasksRealmModel()
                 cellsNameArray = ["Date", "Name lesson", "Description task", "106BFF"]
                 alertSuccessSave(title: "Successive save", message: nil)
@@ -90,13 +76,9 @@ class TasksOptionsTableViewController: UITableViewController {
                 tasksModel = TasksRealmModel()
                 self.navigationController?.popViewController(animated: true)
             }
-
         }
     }
     
-    // теперь мы передаем данные в модель из массива, не напрямую алертами
-    // при корректировке модель уже существует и мы не можем напрямую просто заменить в ней данные
-    // поэтому этот метод вызывается только при создании новой модели когда она еще так сказать пустая, потому, что потом мы можем только прочивать из нее данные а заменить, только через специальный метов в менеджере Реалм
     private func setModel(){
         tasksModel.taskDate = taskDate
         tasksModel.taskName = cellsNameArray[1]
@@ -104,21 +86,18 @@ class TasksOptionsTableViewController: UITableViewController {
         tasksModel.taskColor = cellsNameArray[3]
     }
     
-    
     private func pushToColorsViewController(){
         let vc = ColorsViewController()
         vc.outputColor = { [weak self] color in
             self?.cellsNameArray[3] = color
             self?.tableView.reloadRows(at: [[3,0]], with: .none)
         }
-        
         navigationController?.navigationBar.topItem?.title = "Options"
         navigationController?.pushViewController(vc, animated: true)
     }
     
     
     // MARK: - TableView
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
@@ -134,11 +113,9 @@ class TasksOptionsTableViewController: UITableViewController {
         return cell
     }
     
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
-    
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: HeadersTableViewCell.self)) as! HeadersTableViewCell
@@ -147,11 +124,9 @@ class TasksOptionsTableViewController: UITableViewController {
         return header
     }
     
-    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
-    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! OptionsTableViewCell

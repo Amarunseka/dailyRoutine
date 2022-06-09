@@ -10,14 +10,9 @@ import SwiftUI
 
 class ScheduleOptionsTableViewController: UITableViewController {
 
-    
     // MARK: - initialise elements
-    
-    // названия заголовков
     private let headersNameArray = ["DATE AND TIME", "LESSON", "TEACHER", "COLOR", "PERIOD"]
-    
-    
-    // массив названий ячеек
+
     var cellNamesArray = [["Date", "Time"],
                          ["Name", "Type", "Building", "Audience"],
                          ["Teacher Name"],
@@ -25,15 +20,12 @@ class ScheduleOptionsTableViewController: UITableViewController {
                          ["Repeat every 7 days"]
     ]
     
-    // модель сохранения в базу данных
     var scheduleModel = ScheduleRealmModel()
     var editMode = false
-    
     var scheduleDate: Date?
     var scheduleTime: Date?
     var scheduleWeekDay = Int()
     var scheduleRepeat = true
-//    var dateInfo: (date: Date?, numberOfWeekday: Int, time: Date?, isRepeat: Bool)?
 
 
     // MARK: - Life cycle
@@ -44,7 +36,6 @@ class ScheduleOptionsTableViewController: UITableViewController {
         title = "Options Schedule"
         setupTableView()
                 
-        // добавляем кнопку в navigationBar
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .save,
             target: self,
@@ -60,13 +51,12 @@ class ScheduleOptionsTableViewController: UITableViewController {
         tableView.backgroundColor = .systemGray6
         tableView.bounces = false
 
-        tableView.separatorStyle = .none // убираем разделитель между ячейками
+        tableView.separatorStyle = .none
         
         tableView.register(
             OptionsTableViewCell.self,
             forCellReuseIdentifier: String(describing: OptionsTableViewCell.self))
         
-        // регистрируем Header
         tableView.register(
             HeadersTableViewCell.self,
             forHeaderFooterViewReuseIdentifier: String(describing: HeadersTableViewCell.self))
@@ -76,8 +66,6 @@ class ScheduleOptionsTableViewController: UITableViewController {
     @objc
     private func saveButtonTapped(){
         if
-            // проверяем на заполенения полей для сохранения
-            /// !!!!    ВМЕСТО АЛЕРТА СДЕЛАТЬ НЕАКТИВНОЙ КНОПКУ !!!!
             scheduleDate == nil ||
             scheduleTime == nil ||
             cellNamesArray[1][0] == "Name" {
@@ -89,19 +77,14 @@ class ScheduleOptionsTableViewController: UITableViewController {
             case false:
                 setModel()
 
-                // сохраняем нашу модель в базу данных
                 RealmManager.shared.saveScheduleModel(model: scheduleModel)
-                // а теперь мы наоборот говорим, что после сохранения наша модель равняется модели сохраненной в Real
                 scheduleModel = ScheduleRealmModel()
-                
-                // возвращаем настройки по умолчанию
                 cellNamesArray = [["Date", "Time"],
                                   ["Name", "Type", "Building", "Audience"],
                                   ["Teacher Name"],
                                   ["106BFF"],
                                   ["Repeat every 7 days"]]
                 
-                // показываем алерт что все успешно сохранено
                 alertSuccessSave(title: "Success save", message: nil)
                 tableView.reloadData()
                 
@@ -120,11 +103,7 @@ class ScheduleOptionsTableViewController: UITableViewController {
             }
         }
     }
-    
-    
-    // теперь мы передаем данные в модель из массива, не напрямую алертами
-    // при корректировке модель уже существует и мы не можем напрямую просто заменить в ней данные
-    // поэтому этот метод вызывается только при создании новой модели когда она еще так сказать пустая, потому, что потом мы можем только прочивать из нее данные а заменить, только через специальный метов в менеджере Реалм
+
     private func setModel(){
         scheduleModel.scheduleDate = scheduleDate
         scheduleModel.scheduleTime = scheduleTime
@@ -138,9 +117,7 @@ class ScheduleOptionsTableViewController: UITableViewController {
         scheduleModel.scheduleTeacher = cellNamesArray[2][0]
         scheduleModel.scheduleColor = cellNamesArray[3][0]
     }
-    
-    
-    // переход на teacher
+
     private func pushToTeacherViewController(){
         let vc = TeachersTableViewController()
         let cell = tableView.cellForRow(at: [2,0]) as! OptionsTableViewCell
@@ -153,10 +130,7 @@ class ScheduleOptionsTableViewController: UITableViewController {
         navigationController?.navigationBar.topItem?.title = "Options"
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
-    
-    // переход на color
+
     private func pushToColorsViewController(){
         let vc = ColorsViewController()
         vc.outputColor = { [weak self] color in
@@ -167,12 +141,10 @@ class ScheduleOptionsTableViewController: UITableViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    // метод делегата для OptionsTableViewCell записывающий положение переключателя в Real
     private func switchRepeatState(value: Bool) {
         scheduleRepeat = value
     }
     
-    // просто метод для перехода
     private func pushViewController(vc: UIViewController){
         let vc = vc
         navigationController?.navigationBar.topItem?.title = "Options"
@@ -182,7 +154,6 @@ class ScheduleOptionsTableViewController: UITableViewController {
     
     
     // MARK: - TableView
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 5
     }
@@ -199,14 +170,12 @@ class ScheduleOptionsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: OptionsTableViewCell.self), for: indexPath) as! OptionsTableViewCell
         
-        // метод конфигурации ячейки
         cell.cellScheduleConfigure(namesArray: cellNamesArray,
                                    indexPath: indexPath,
                                    color: cellNamesArray[3][0],
                                    isEdit: editMode,
                                    isRepeat: scheduleRepeat)
         
-        // для передачи в ячейку положение свитча
         cell.switchStateOutput = { [weak self] switchState in
             self?.switchRepeatState(value: switchState)
         }
@@ -224,7 +193,6 @@ class ScheduleOptionsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: HeadersTableViewCell.self)) as! HeadersTableViewCell
         
-        // метод присваивания названий заголовкам
         header.headerCellConfigure(nameArray: headersNameArray, section: section)
         return header
     }
@@ -241,60 +209,43 @@ class ScheduleOptionsTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! OptionsTableViewCell
 
         switch indexPath {
-            // передаем в алерт наш лейб, и в комплишене алерта присваиваем ему название из сделанного стринга из дэйтпикера
         case [0,0]: alertDate(label: cell.nameCellLabel) { numberOfWeekday, date in
-            // а потом передаем в модель дату и день недели с формированную в самом алерте и переданому в комплишене
             self.scheduleDate = date
             self.scheduleWeekDay = numberOfWeekday
         }
-            // передаем в алерт наш лейб, и в комплишене алерта присваиваем ему название из сделанного стринга из дэйтпикера
         case [0,1]: alertTime(label: cell.nameCellLabel) { time in
-            // а потом передаем в модель время с формированное в самом алерте и переданому в комплишене
             self.scheduleTime = time
         }
-
-            // передаем в алерт наш лейбназвание алерта, потом плейсхолдер который будем видеть текстфилде алерта
         case [1,0]: alertForCellName(
             label: cell.nameCellLabel,
             name: "Name Lesson",
             placeholder: "Enter name lesson") { text in
-                // передаем в модель текс из текстфилда алерта
                 self.cellNamesArray[1][0] = text
             }
-
-            // передаем в алерт наш лейбназвание алерта, потом плейсхолдер который будем видеть текстфилде алерта
         case [1,1]: alertForCellName(
             label: cell.nameCellLabel,
             name: "Type Lesson",
             placeholder: "Enter type lesson") { text in
-                // передаем в модель текс из текстфилда алерта
                 self.cellNamesArray[1][1] = text
             }
-
-            // передаем в алерт наш лейбназвание алерта, потом плейсхолдер который будем видеть текстфилде алерта
         case [1,2]: alertForCellName(
             label: cell.nameCellLabel,
             name: "Building number",
             placeholder: "Enter number of building") { text in
-                // передаем в модель текс из текстфилда алерта
                 self.cellNamesArray[1][2] = text
             }
 
-            // передаем в алерт наш лейбназвание алерта, потом плейсхолдер который будем видеть текстфилде алерта
         case [1,3]: alertForCellName(
             label: cell.nameCellLabel,
             name: "Audience number",
             placeholder: "Enter number of audience") { text in
-                // передаем в модель текс из текстфилда алерта
                 self.cellNamesArray[1][3] = text
             }
 
         case [2,0]:
-            // в самом TeachersTableViewController есть способ передачи сюда учителя
             pushToTeacherViewController()
 
         case [3,0]:
-            // в самом ScheduleColorsViewController есть способ передачи сюда цвета
             pushToColorsViewController()
         default:
             print("")

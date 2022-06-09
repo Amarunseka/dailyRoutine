@@ -49,7 +49,7 @@ class TasksTableViewCell: UITableViewCell {
     
     // MARK: - private methods
     private func setupView(){
-        selectionStyle = .none //чтобы ячейка не выделялась когда на нее нажимаешь
+        selectionStyle = .none
         taskDescription.numberOfLines = 2
 
         addSubview(taskName)

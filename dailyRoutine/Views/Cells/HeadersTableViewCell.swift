@@ -27,7 +27,6 @@ class HeadersTableViewCell: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // для правильного расчета констрейнтов их нужно запускать в этом методе
     override func layoutSubviews() {
         super.layoutSubviews()
         setConstraints()
@@ -44,7 +43,6 @@ class HeadersTableViewCell: UITableViewHeaderFooterView {
     }
     
     // MARK: - public methods
-    // устанавливаем название заголовка
     func headerCellConfigure(nameArray: [String], section: Int) {
         setHeaderLabelText(nameArray: nameArray, section: section)
     }

@@ -18,38 +18,29 @@ extension UIViewController {
         
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
-        // изменяем на английский язык
         datePicker.locale = Locale(identifier: "en_US")
         datePicker.preferredDatePickerStyle = .wheels
         
         alert.view.addSubview(datePicker)
         
-        
         let ok = UIAlertAction(
             title: "OK",
             style: .default) { (action) in
                 
-                // получаем дату с пикера в строке
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd.MM.yyyy"
                 dateFormatter.locale = Locale(identifier: "en_US")
                 let dateString = dateFormatter.string(from: datePicker.date)
                 
-                // определяем текущий календарь
                 let calendar = Calendar.current
                 
-                // получаем номер дня недели
                 let component = calendar.dateComponents([.weekday], from: datePicker.date)
                 guard let weekday = component.weekday else {return}
                 
-//                let numberOfWeekday = weekday
-                // получаем дату с пикера
                 let date = datePicker.date
                 
-                // передаем данные в completion
                 completion(weekday, date)
                 
-                // пишем дату
                 label.textColor = .black
                 label.text = dateString
             }
@@ -62,9 +53,7 @@ extension UIViewController {
         alert.addAction(cancel)
         
         alert.negativeWidthConstraint()
-        
-        
-        // увеличиваем наш алерт
+
         alert.view.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
         datePicker.translatesAutoresizingMaskIntoConstraints = false

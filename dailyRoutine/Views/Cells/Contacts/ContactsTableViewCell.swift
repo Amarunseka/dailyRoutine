@@ -27,7 +27,6 @@ class ContactsTableViewCell: UITableViewCell {
     private let phoneImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        // делаем цветной значок
         imageView.image = UIImage(systemName: "phone.fill")?.withRenderingMode(.alwaysTemplate)
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .green
@@ -37,7 +36,6 @@ class ContactsTableViewCell: UITableViewCell {
     private let mailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        // делаем цветной значок
         imageView.image = UIImage(systemName: "envelope.fill")?.withRenderingMode(.alwaysTemplate)
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .green
@@ -63,7 +61,7 @@ class ContactsTableViewCell: UITableViewCell {
     
     // MARK: - private methods
     private func setupView(){
-        selectionStyle = .none //чтобы ячейка не выделялась когда на нее нажимаешь
+        selectionStyle = .none
 
         addSubview(contactImageView)
         addSubview(nameLabel)
@@ -78,24 +76,20 @@ class ContactsTableViewCell: UITableViewCell {
             distribution: .fillProportionally)
     }
     
-    // метод конфигурирования ячейки при назначении ее в таблице на ContactsVC
     private func setupCell(model: ContactsRealmModel) {
         nameLabel.text = model.contactName
         phoneLabel.text = model.contactPhone
         emailLabel.text = model.contactEmail
         
-        // пытаемся получить картинку из нашей модели, и если получаем то присваиваем ее контакту
         if let data = model.contactPhoto, let image = UIImage(data: data) {
             contactImageView.image = image
         } else {
-            // если нет присваиваем системную картинку
             contactImageView.image = UIImage(systemName: "person.fill")
         }
     }
 
     
     // MARK: - public methods
-    // метод конфигурирования ячейки при назначении ее в таблице на ContactsVC
     func cellConfigure(model: ContactsRealmModel) {
         setupCell(model: model)
     }

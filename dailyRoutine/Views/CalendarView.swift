@@ -48,16 +48,15 @@ final class CalendarView: UIView {
     private func setupCalendar(){
         calendar.delegate = self
         calendar.dataSource = self
-        // отображение календаря при загрузке с видом неделя
         calendar.scope = .week
     }
 }
     
 // MARK: - SwipeGestureRecognizer
 extension CalendarView  {
-    // раскрываем прячем календарь
+
     private func swipeAction(){
-        // это жесты на свайп
+
         let swipeUP = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
         swipeUP.direction = .up
         calendar.addGestureRecognizer(swipeUP)
@@ -93,7 +92,7 @@ extension CalendarView  {
 
 // MARK: - FSCalendarDataSource, FSCalendarDelegate
 extension CalendarView: FSCalendarDataSource, FSCalendarDelegate  {
-    // метод изменение автоматически размера календаря при изменении масштаба view
+
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendarHeightConstraint.constant = bounds.height
         let outputHeight = bounds.height + showHideButton.frame.size.height
@@ -101,7 +100,6 @@ extension CalendarView: FSCalendarDataSource, FSCalendarDelegate  {
         layoutIfNeeded()
     }
 
-    // метод срабатывания при нажатии на элемент календаря
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         outputCalendarDelegate?.outputDidSelectDate(date: date)
     }
@@ -113,7 +111,6 @@ extension CalendarView {
         addSubview(calendar)
         addSubview(showHideButton)
 
-//         для того, что бы изменять размер при изменении масштаба констрейнту высоты заводим отдельно от остальных
         calendarHeightConstraint = NSLayoutConstraint(
             item: calendar,
             attribute: .height,

@@ -12,6 +12,7 @@ import RealmSwift
 class TasksViewController: UITabBarController {
 
     // MARK: - initialise elements
+    var tasksArray: Results<TasksRealmModel>!
     private var calendarHeightConstraint: NSLayoutConstraint!
     
     private let calendar: FSCalendar = {
@@ -38,17 +39,11 @@ class TasksViewController: UITabBarController {
         return tableView
     }()
     
-    // потом расфорсанрапить
-    var tasksArray: Results<TasksRealmModel>!
-
-    
     // MARK: - Life cycle
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,8 +58,6 @@ class TasksViewController: UITabBarController {
         
         setTaskOnDay(date: calendar.today!)
 
-        
-        // добавляем кнопку в navigationBar
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
@@ -77,7 +70,6 @@ class TasksViewController: UITabBarController {
     private func setupCalendar(){
         calendar.delegate = self
         calendar.dataSource = self
-        // отображение календаря при загрузке с видом неделя
         calendar.scope = .week
     }
     
@@ -91,7 +83,6 @@ class TasksViewController: UITabBarController {
     }
     
     private func pushToOptionInEditingMode(taskModel: TasksRealmModel){
-        // получаем дату с пикера в строке
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = "dd.MM.yyyy"
@@ -111,13 +102,11 @@ class TasksViewController: UITabBarController {
         navigationController?.pushViewController(vc, animated: true)
     }
 
-    
     @objc
     private func addButtonTapped(){
         let vc = TasksOptionsTableViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-
 
     @objc
     private func showHideButtonTapped(){
@@ -132,7 +121,6 @@ class TasksViewController: UITabBarController {
     
     
     // MARK: - SwipeGestureRecognizer
-    
     private func swipeAction(){
         let swipeUP = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
         swipeUP.direction = .up
@@ -160,14 +148,12 @@ class TasksViewController: UITabBarController {
     // MARK: - загрузка данных из модели
     private func setTaskOnDay(date: Date){
 
-        // для начала нам нужно создать диапазон дня, как как когда мы нажимаем на дату, то мы не можем точно попасть в туже самую наносекунду
         let dateStart = date
         let dateEnd: Date = {
             let component = DateComponents(day: 1, second: -1)
             return Calendar.current.date(byAdding: component, to: dateStart)!
         }()
         
-        /// выгружаем событие  объявляя предикат (%@ - означает что туда будет подставлено значение)
         tasksArray = RealmManager.shared.localRealm.objects(TasksRealmModel.self).filter("taskDate BETWEEN %@", [dateStart, dateEnd])
         tableView.reloadData()
     }
@@ -180,10 +166,7 @@ class TasksViewController: UITabBarController {
     }
 }
   
-
-
 // MARK: - UITableViewDelegate, UITableViewDataSource
-
 extension TasksViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -200,13 +183,10 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource {
             self?.readyButtonTapped(indexPath: indexPath)
         }
         
-        
         let model = tasksArray[indexPath.row]
         cell.cellConfigure(model: model)
-
         return cell
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
@@ -216,24 +196,19 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource {
         pushToOptionInEditingMode(taskModel: tasksArray[indexPath.row])
     }
     
-    
-    // метод удаления задач
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let editingRow = tasksArray[indexPath.row]
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, completion in
             RealmManager.shared.deleteTaskModel(model: editingRow)
             tableView.reloadData()
         }
-        
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-
 }
 
 // MARK: - FSCalendarDataSource, FSCalendarDelegate
 
 extension TasksViewController: FSCalendarDataSource, FSCalendarDelegate  {
-    // метод изменение автоматически размера календаря при изменении масштаба view
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendarHeightConstraint.constant = bounds.height
         view.layoutIfNeeded()
@@ -244,10 +219,7 @@ extension TasksViewController: FSCalendarDataSource, FSCalendarDelegate  {
     }
 }
 
-
-
 // MARK: - Setup Constraints
-
 extension TasksViewController {
     
     private func setConstraints(){
@@ -255,8 +227,6 @@ extension TasksViewController {
         view.addSubview(showHideButton)
         view.addSubview(tableView)
 
-
-        // для того, что бы изменять размер при изменении масштаба констрейнту высоты заводим отдельно от остальных
         calendarHeightConstraint = NSLayoutConstraint(
             item: calendar,
             attribute: .height,
@@ -266,7 +236,6 @@ extension TasksViewController {
             multiplier: 1,
             constant: 300)
         calendar.addConstraint(calendarHeightConstraint)
-        
         
         let constraints = [
             calendar.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),

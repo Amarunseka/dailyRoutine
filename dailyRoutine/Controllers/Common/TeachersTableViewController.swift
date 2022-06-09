@@ -20,8 +20,6 @@ class TeachersTableViewController: UITableViewController {
         super.viewDidLoad()
         setupView()
         setupTableView()
-        
-        // заполняем наш массив всеми учителями из модели, по фильтру учитель
     }
     
     // MARK: - private methods
@@ -39,7 +37,6 @@ class TeachersTableViewController: UITableViewController {
                            forCellReuseIdentifier: String(describing: ContactsTableViewCell.self))
     }
     
-    // отдаем имя выбранного учителя
     private func setTeacher(teacher: String) {
         guard let outputTeacherName = outputTeacherName else {return}
         outputTeacherName(teacher)
@@ -59,7 +56,6 @@ extension TeachersTableViewController {
                                                  for: indexPath) as! ContactsTableViewCell
         
         let model = contactArray[indexPath.row]
-        // конфигурируем ячейку переданной в нее модели
         cell.cellConfigure(model: model)
         return cell
     }

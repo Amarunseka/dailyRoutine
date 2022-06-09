@@ -21,11 +21,9 @@ extension UIViewController {
             title: "Ok",
             style: .default) { (action) in
                 
-                // присваиваем значение textField'а ячейке
                 let textField = alert.textFields?.first
                 guard let text = textField?.text else {return}
                 
-                // делаем проверку, что у нас не пустое значение, если пусто то равно названию по умолчанию
                 if text != "" {
                     label.textColor = .black
                     label.text = text
@@ -36,7 +34,6 @@ extension UIViewController {
                 completion(text)
             }
         
-        // добавляем textField  на alert
         alert.addTextField { (textField) in
             textField.placeholder = placeholder
         }

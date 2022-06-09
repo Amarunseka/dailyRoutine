@@ -16,7 +16,6 @@ class MainTabBarViewController: UITabBarController {
         setupTabBar()
     }
     
-    
     // MARK: - private methods
     private func setupTabBar(){
         
@@ -44,10 +43,8 @@ class MainTabBarViewController: UITabBarController {
     
     private func createNavController(vc: UIViewController, itemName: String, itemImage: String) -> UINavigationController {
         
-        // создаем item в tabBar
         let item = UITabBarItem(
             title: itemName,
-            // тут мы ставим картинку и делаем у нее смещение немного вниз
             image: UIImage(systemName: itemImage)?.withAlignmentRectInsets(.init(
                 top: 10,
                 left: 0,
@@ -55,7 +52,6 @@ class MainTabBarViewController: UITabBarController {
                 right: 0)),
             tag: 0)
         
-        // а тут сдвигаем немного вниз title
         item.titlePositionAdjustment = .init(horizontal: 0, vertical: 10)
         
         let navController = UINavigationController(rootViewController: vc)

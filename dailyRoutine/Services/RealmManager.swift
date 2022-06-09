@@ -16,16 +16,13 @@ class RealmManager {
     
     let localRealm = try! Realm()
     
-    
     // MARK: - Schedule
-    // метод сохранения нашей модели в базу данных
     func saveScheduleModel(model: ScheduleRealmModel) {
         try! localRealm.write {
             localRealm.add(model)
         }
     }
     
-    // метод удаления нашей модели из базы данных
     func deleteScheduleModel(model: ScheduleRealmModel) {
         try! localRealm.write {
             localRealm.delete(model)
@@ -47,17 +44,13 @@ class RealmManager {
         }
     }
     
-    
     // MARK: - Tasks
-    
-    // метод сохранения нашей модели в базу данных
     func saveTaskModel(model: TasksRealmModel) {
         try! localRealm.write {
             localRealm.add(model)
         }
     }
     
-    // метод удаления нашей модели из базы данных
     func deleteTaskModel(model: TasksRealmModel) {
         try! localRealm.write {
             localRealm.delete(model)
@@ -80,15 +73,12 @@ class RealmManager {
     }
     
     // MARK: - Contacts
-    
-    // метод сохранения нашей модели в базу данных
     func saveContactModel(model: ContactsRealmModel) {
         try! localRealm.write {
             localRealm.add(model)
         }
     }
     
-    // метод удаления нашей модели из базы данных
     func deleteContactModel(model: ContactsRealmModel) {
         try! localRealm.write {
             localRealm.delete(model)

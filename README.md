@@ -20,9 +20,7 @@
 [![ScheduleOptEmpty](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleOptEmpty.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleOptEmpty.png)
 [![ScheduleOptTeacherChose](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleOptTeacherChose.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleOptTeacherChose.png)
 [![ScheduleOptDatePD](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ScheduleOptDatePD.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ScheduleOptDatePD.png)
-
-
-
+[![CollorsView](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/CollorsView.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/CollorsView.png)
 
 На главном экране отображается календарь в развернутом или свернутом виде.
 При выборе даты на календаре,  отображаются запланированные события на выбранную дату с указанием:
@@ -41,6 +39,10 @@
 ___
 
 ### Планировщик задач.
+[![TasksMainViewBC](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/TasksMainViewBC.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/TasksMainViewBC.png)
+[![TasksMainViewSC](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/TasksMainViewBC.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/TasksMainViewSC.png)
+[![TaskOptEmpty](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/TaskOptEmpty.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/TaskOptEmpty.png)
+
 На главном экране отображается календарь в развернутом или свернутом виде.
 При выборе даты на календаре,  отображаются запланированные задачи на выбранную дату с указанием:
 - названия
@@ -54,6 +56,11 @@ ___
 ___
 
 ### Контакты.
+[![ContactsMainView](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ContactsMainView.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ContactsMainView.png)
+[![ContactsOptEmpty](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ContactsOptEmpty.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ContactsOptEmpty.png)
+[![ContactsFinder](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/Small/ContactsFinder.png)](https://github.com/Amarunseka/dailyRoutine/blob/main/assets/ContactsFinder.png)
+
+
 На главном экране отображаются сохраненные контакты по группам: преподаватели и друзья. 
 Есть возможность поиска контактов по содержанию символов.
 При выборе контакта открывается экран редактирования.

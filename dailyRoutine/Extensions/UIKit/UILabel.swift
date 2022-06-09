@@ -15,7 +15,7 @@ extension UILabel {
         self.font = font
         self.textColor = .black
         self.textAlignment = alignment
-        self.adjustsFontSizeToFitWidth = true  // подгоняние текста под ширину лэйбла
+        self.adjustsFontSizeToFitWidth = true
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 }

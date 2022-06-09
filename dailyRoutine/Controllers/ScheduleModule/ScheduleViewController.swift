@@ -26,7 +26,6 @@ class ScheduleViewController: UITabBarController {
         
         view.backgroundColor = .white
         title = "Schedule"
-        // добавляем кнопку в navigationBar
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
@@ -46,7 +45,6 @@ class ScheduleViewController: UITabBarController {
 
     
     // MARK: - Actions-Targets
-    // изменение размера CalendarView
     private func changeHeightAnchorCalendarView(height: CGFloat?){
         guard let height = height else {return}
         viewHeightConstraint.constant = height
@@ -55,20 +53,10 @@ class ScheduleViewController: UITabBarController {
     
     private func setupCalendarView(){
         calendarView.outputCalendarDelegate = self
-//
-//        // изменение размера календаря и вью при открытии-закрытии
-//        calendarView.outputChangeHeight = { [weak self] height in
-//            self?.changeHeightAnchorCalendarView(height: height)
-//        }
-//
-//        // метод нажатия на дату на календаре
-//        calendarView.outputDidSelectDate = { [weak self] date in
-//            self?.scheduleOnDay(date: date)
-//        }
     }
     
     private func setupTableView(){
-        tableView.bounces = false // чтобы таблица не тянулась, но скролл продолжает работать
+        tableView.bounces = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         tableView.delegate = self
@@ -80,7 +68,6 @@ class ScheduleViewController: UITabBarController {
 
     
     private func pushToOptionInEditingMode(scheduleModel: ScheduleRealmModel){
-        // получаем дату с пикера в строке
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = "dd.MM.yyyy"
@@ -95,7 +82,6 @@ class ScheduleViewController: UITabBarController {
         vc.scheduleModel = scheduleModel
         vc.editMode = true
 
-        // дату нужно передавать потому, что если ее не передать и не менять потом, задача не сохраниться
         vc.scheduleDate = scheduleModel.scheduleDate
         vc.scheduleWeekDay = scheduleModel.scheduleWeekday
         vc.scheduleTime = scheduleModel.scheduleTime
@@ -123,23 +109,17 @@ class ScheduleViewController: UITabBarController {
         let components = calendar.dateComponents([.weekday], from: date)
         guard let weekday = components.weekday else {return}
         
-        /// предикат для события которое повторяется
         let predicateRepeat = NSPredicate(format: "scheduleWeekday = \(weekday) AND scheduleRepeat = true")
         
-        
-        /// предикат для события которе не повторяется
-        // для начала нам нужно создать диапазон дня, как как когда мы нажимаем на дату, то мы не можем точно попасть в туже самую наносекунду
         let dateStart = date
         let dateEnd: Date = {
             let component = DateComponents(day: 1, second: -1)
             return Calendar.current.date(byAdding: component, to: dateStart)!
         }()
-        // создаем сам предикат
         let predicateUnrepeat = NSPredicate(format: "scheduleRepeat = false AND scheduleDate BETWEEN %@", [dateStart, dateEnd])
         let compound = NSCompoundPredicate(type: .or, subpredicates: [predicateRepeat, predicateUnrepeat])
 
         
-        /// выгружаем событие
         scheduleArray = RealmManager.shared.localRealm.objects(ScheduleRealmModel.self).filter(compound).sorted(byKeyPath: "scheduleTime")
         tableView.reloadData()
     }
@@ -154,12 +134,10 @@ class ScheduleViewController: UITabBarController {
 
 // MARK: - OutputCalendarDataProtocol
 extension ScheduleViewController: OutputCalendarDataProtocol {
-    // изменение размеров при изменение календаря
     func outputChangeHeight(height: CGFloat) {
         changeHeightAnchorCalendarView(height: height)
     }
     
-    // загрузка данных по выбранной дате на календаре
     func outputDidSelectDate(date: Date) {
         scheduleOnDay(date: date)
     }
@@ -168,7 +146,6 @@ extension ScheduleViewController: OutputCalendarDataProtocol {
 
 
 // MARK: - UITableViewDataSource
-
 extension ScheduleViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -189,14 +166,12 @@ extension ScheduleViewController: UITableViewDataSource {
 }
   
 // MARK: - UITableViewDelegate
-
 extension ScheduleViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
-    // метод удаления задач
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let editingRow = scheduleArray[indexPath.row]
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, completion in
@@ -221,7 +196,6 @@ extension ScheduleViewController {
         view.addSubview(calendarView)
         view.addSubview(tableView)
 
-        // для того, что бы изменять размер при изменении масштаба констрейнту высоты заводим отдельно от остальных
         viewHeightConstraint = calendarView.heightAnchor.constraint(equalToConstant: 320)
         viewHeightConstraint.isActive = true
 

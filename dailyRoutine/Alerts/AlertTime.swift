@@ -18,7 +18,6 @@ extension UIViewController {
         
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .time
-        // здесь оставляем русский, что бы было 24часа
         datePicker.locale = Locale(identifier: "ru_RU")
         datePicker.preferredDatePickerStyle = .wheels
         
@@ -29,23 +28,18 @@ extension UIViewController {
             title: "OK",
             style: .default) { (action) in
                 
-                // получаем время в строку
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "HH:mm"
 
                 let timeString = dateFormatter.string(from: datePicker.date)
                 
-                // получаем время в формате Date
                 let timeSchedule = datePicker.date
                 
-                // передаем данные в completion
                 completion(timeSchedule)
                 
-                // присваиваем название ячейки
                 label.textColor = .black
                 label.text = timeString
             }
-        
         
         let cancel = UIAlertAction(
             title: "Cancel",
@@ -54,8 +48,6 @@ extension UIViewController {
         alert.addAction(ok)
         alert.addAction(cancel)
         
-        
-        // увеличиваем наш алерт
         alert.view.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
         datePicker.translatesAutoresizingMaskIntoConstraints = false

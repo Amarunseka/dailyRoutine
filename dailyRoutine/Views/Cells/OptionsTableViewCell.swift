@@ -7,7 +7,6 @@
 
 import UIKit
 
-/// !!!!  ПОПРОБОВАТЬ РАЗОБРАТЬСЯ ПОЧЕМУ ЯЧЕЙКИ ВЕДУТ СЕБЯ СТРАННО !!!
 class OptionsTableViewCell: UITableViewCell {
 
     // MARK: - initialise elements
@@ -30,7 +29,6 @@ class OptionsTableViewCell: UITableViewCell {
         return label
     }()
     
-    // переключатель
     let repeatSwitch: UISwitch = {
         let repeatSwitch = UISwitch()
         repeatSwitch.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +48,6 @@ class OptionsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // для правильного расчета констрейнтов их нужно запускать в этом методе
     override func layoutSubviews() {
         super.layoutSubviews()
         setConstraints()
@@ -58,7 +55,7 @@ class OptionsTableViewCell: UITableViewCell {
     
     // MARK: - private methods
     private func setupView(){
-        selectionStyle = .none //чтобы ячейка не выделялась когда на нее нажимаешь
+        selectionStyle = .none
         backgroundColor = .clear
         
         addSubview(backgroundViewCell)
@@ -115,7 +112,6 @@ extension OptionsTableViewCell {
         repeatSwitch.isHidden = true
         nameCellLabel.text = namesArray[indexPath.section]
         
-        // присваиваем цвет ячейке при его выборе
         let color = UIColor().colorFromHex(color)
         
         if indexPath.section < 3 {
@@ -145,11 +141,8 @@ extension OptionsTableViewCell {
 
         switch image {
         case nil:
-            // проверяем, что если мы не передали изображение то тогда передаем системную картинку контакта
-            // передаем только в 4 секцию в остальных nil
             indexPath.section == 4 ? backgroundViewCell.image = UIImage(systemName: "person.fill.badge.plus") : nil
         default:
-            // а тут мы получили изображение и передаем его контакту
             indexPath.section == 4 ? backgroundViewCell.image = image : nil
             backgroundViewCell.contentMode = .scaleAspectFill
         }

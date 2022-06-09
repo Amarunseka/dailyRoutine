@@ -28,7 +28,6 @@ class ColorsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // для правильного расчета констрейнтов их нужно запускать в этом методе
     override func layoutSubviews() {
         super.layoutSubviews()
         setConstraints()
@@ -36,7 +35,7 @@ class ColorsTableViewCell: UITableViewCell {
     
     // MARK: - private methods
     private func setupView(){
-        selectionStyle = .none //чтобы ячейка не выделялась когда на нее нажимаешь
+        selectionStyle = .none
         backgroundColor = .clear
         addSubview(backgroundCellView)
     }
@@ -58,7 +57,6 @@ class ColorsTableViewCell: UITableViewCell {
     }
     
     // MARK: - public methods
-    // устанавливаем цвет ячейки
     func cellConfigure(indexPath: IndexPath){
         cellBackgroundColorConfigure(indexPath: indexPath)
     }

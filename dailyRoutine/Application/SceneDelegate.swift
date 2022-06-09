@@ -17,18 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        // манипуляция, чтобы было видно NavigationBar и TabBar  !! обязательно делать вначале !!
+
         appearanceNB.configureWithDefaultBackground()
         appearanceTB.configureWithDefaultBackground()
         UINavigationBar.appearance().scrollEdgeAppearance = appearanceNB
         UITabBar.appearance().scrollEdgeAppearance = appearanceTB
         
-        // стандартная настройка окна
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = MainTabBarViewController()
         window?.makeKeyAndVisible()
         
-        // эта строка означает что мы поддерживаем только светлую тему
         window?.overrideUserInterfaceStyle = .light
     }
 

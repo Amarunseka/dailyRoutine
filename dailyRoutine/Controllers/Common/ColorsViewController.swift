@@ -10,7 +10,6 @@ import UIKit
 class ColorsViewController: UITableViewController {
 
     // MARK: - initialise elements
-    // названия заголовков
     private let headersNameArray = ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "DEEP BLUE", "PURPLE"]
     var outputColor: ((String)->())?
 
@@ -29,7 +28,7 @@ class ColorsViewController: UITableViewController {
         tableView.dataSource = self
         tableView.backgroundColor = .systemGray6
         tableView.bounces = false
-        tableView.separatorStyle = .none // убираем разделитель между ячейками
+        tableView.separatorStyle = .none
         
         tableView.register(
             ColorsTableViewCell.self,
